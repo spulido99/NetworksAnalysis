@@ -1,7 +1,0 @@
-install jupyter for python
-	sudo pip install jupyter
-
-Iniciar jupyter
-	jupyter notebook
-
-sudo grimmat
