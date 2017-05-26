@@ -7,8 +7,25 @@ db = client.caobanutresa_repeat_nouns_emojis_adjectives
 vocab = db.tweets_words.distinct('word')
 
 users = list(db.tweets_users.find({},{'text_emojis_nouns':1, 'id':1, 'emojis':1, '_id': 0}))
-remove_words = ['chimb', 'mierda', 'puta', 'malparid', 'gonorrea', 'joder', 'cacorr', 'pirob', 'piru']
-remain_words = ['computa', 'computador', 'computadora', 'diputado']
+# remove_words = ['chimb', 'mierda', 'puta', 'malparid', 'gonorrea', 'joder', 'cacorr', 'pirob', 'piru']
+# remain_words = ['computa', 'computador', 'computadora', 'diputado']
+remove_words = []
+with open('remove_words.txt', encoding="utf8") as f:
+    for line in f:
+        remove_word = line.replace('\n', '')
+        remove_words.append(remove_word)
+print("remove_words:", remove_words)
+print("len(remove_words):", len(remove_words))
+print()
+
+remove_chars = []
+with open('remove_chars.txt', encoding="utf8") as f:
+    for line in f:
+        remove_char = line.replace('\n', '')
+        remove_chars.append(remove_char)
+print("remove_chars:", remove_chars)
+print("len(remove_chars):", len(remove_chars))
+print()
 
 total_words = len(vocab)
 print('total palabras vocabulario:', total_words)
@@ -44,16 +61,21 @@ for user in users:
                 # print(word_lower)
                 add_word_flag = False
                 count += 1
-            # for remove_word in remove_words:
-            #     if (remove_word in word_lower) and (word_lower not in remain_words):
-            #         # print(word_lower)
-            #         add_word_flag = False
-            #         count +=1
+            if word_lower in remove_words:
+                # print("word_lower:", word_lower)
+                add_word_flag = False
+                count += 1
+            for remove_char in remove_chars:
+                if remove_char in word_lower:
+                    # print(word_lower)
+                    add_word_flag = False
+                    count +=1
             if add_word_flag == True:
                 edges.append((user['id'],word_lower))
 print("count:", count)
+print(len(edges))
 
-edges_file = open('edges_file_total_network_weights_undirected_2.txt', 'w')
+edges_file = open('edges_file_total_network_weights_undirected_3.txt', 'w')
 
 print('source\ttarget\ttype', file=edges_file)
 
