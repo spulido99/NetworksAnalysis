@@ -70,12 +70,15 @@ for user in users:
                     # print(word_lower)
                     add_word_flag = False
                     count +=1
-            if add_word_flag == True:
+            if word_lower.startswith("@"):
+                add_word_flag = False
+                count += 1
+            if add_word_flag:
                 edges.append((user['id'],word_lower))
 print("count:", count)
 print(len(edges))
 
-edges_file = open('edges_file_total_network_weights_undirected_3.txt', 'w')
+edges_file = open('edges_file_total_network_weights_undirected_4.txt', 'w')
 
 print('source\ttarget\ttype', file=edges_file)
 
