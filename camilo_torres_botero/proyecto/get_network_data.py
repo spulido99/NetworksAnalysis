@@ -1,14 +1,17 @@
 from pymongo import MongoClient
 from nltk.corpus import stopwords
 
+# Conexion a la base de datos
 client = MongoClient('localhost', 27017)
 db = client.caobanutresa_repeat_nouns_emojis_adjectives
 
+# Se obtiene el vocabulario
 vocab = db.tweets_words.distinct('word')
 
+# Se obtienen todos los usuarios
 users = list(db.tweets_users.find({},{'text_emojis_nouns':1, 'id':1, 'emojis':1, '_id': 0}))
-# remove_words = ['chimb', 'mierda', 'puta', 'malparid', 'gonorrea', 'joder', 'cacorr', 'pirob', 'piru']
-# remain_words = ['computa', 'computador', 'computadora', 'diputado']
+
+# Arreglo con las palabras a remover
 remove_words = []
 with open('remove_words.txt', encoding="utf8") as f:
     for line in f:
@@ -18,6 +21,7 @@ print("remove_words:", remove_words)
 print("len(remove_words):", len(remove_words))
 print()
 
+# Arreglo con las cadenas de caracteres a remover
 remove_chars = []
 with open('remove_chars.txt', encoding="utf8") as f:
     for line in f:
@@ -27,26 +31,19 @@ print("remove_chars:", remove_chars)
 print("len(remove_chars):", len(remove_chars))
 print()
 
+# Total de palabras encontradas en la base de datos
 total_words = len(vocab)
 print('total palabras vocabulario:', total_words)
 print('total usuarios:', len(users))
 
+# Variables usadas para controlar el numero de palabras removidas
 word_count = 1
 word_count_percent = 0
+# Arreglo de enlaces
 edges = []
-# for word in vocab:
-#     new_word_count_percent = int(round((word_count / total_words) * 100))
-#     if new_word_count_percent > word_count_percent:
-#         print(new_word_count_percent, "%")
-#         word_count_percent = new_word_count_percent
-#     word_count += 1
-#     word_lower = word.lower()
-#     for user in users:
-#         if 'text_emojis_nouns' in user:
-#             text_emojis_nouns_lower = list(map(lambda x:x.lower(),user['text_emojis_nouns']))
-#             if word_lower in text_emojis_nouns_lower:
-#                 edges.add((user['id'],word_lower))
 
+# Se recorren los usuarios y las palabras que han usado ('text_emojis_nouns')
+# Se realiza la respectiva limpieza y se agregan al arreglo de enlaces
 count = 0
 for user in users:
     if 'text_emojis_nouns' in user:
@@ -78,7 +75,8 @@ for user in users:
 print("count:", count)
 print(len(edges))
 
-edges_file = open('edges_file_total_network_weights_undirected_4.txt', 'w')
+# Se guardan los enlaces en un archivo de texto
+edges_file = open('edges_file_total_network_weights_undirected.txt', 'w')
 
 print('source\ttarget\ttype', file=edges_file)
 
