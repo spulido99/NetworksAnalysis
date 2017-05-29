@@ -1,0 +1,52 @@
+ID,Label,fips,Modularity Class
+0,Alabama,1,3
+3,Arkansas,5,0
+4,California,6,4
+9,Florida,12,3
+10,Georgia,13,3
+13,Illinois,17,5
+14,Indiana,18,5
+16,Kansas,20,0
+17,Kentucky,21,5
+18,Louisiana,22,0
+24,Mississippi,28,0
+25,Missouri,29,0
+33,North Carolina,37,3
+35,Ohio,39,5
+36,Oklahoma,40,0
+38,Pennsylvania,42,2
+42,Tennessee,47,5
+43,Texas,48,0
+46,Virginia,51,1
+2,Arizona,4,4
+5,Colorado,8,4
+6,Connecticut,9,2
+11,Hawaii,15,4
+12,Idaho,16,4
+15,Iowa,19,5
+19,Maine,23,6
+20,Maryland,24,1
+21,Massachusetts,25,6
+22,Michigan,26,5
+23,Minnesota,27,5
+26,Montana,30,4
+27,Nebraska,31,5
+28,Nevada,32,4
+30,New Jersey,34,2
+31,New Mexico,35,0
+32,New York,36,2
+37,Oregon,41,4
+40,South Carolina,45,3
+44,Utah,49,4
+47,Washington,53,4
+48,West Virginia,54,1
+49,Wisconsin,55,5
+50,Wyoming,56,4
+29,New Hampshire,33,6
+39,Rhode Island,44,6
+7,Delaware,10,2
+8,District of Columbia,11,1
+45,Vermont,50,6
+1,Alaska,2,4
+41,South Dakota,46,5
+34,North Dakota,38,5
